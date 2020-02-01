@@ -2,13 +2,14 @@
 require_once("../controller/connectorDB.php");
 class Disk{
     private $image;
-    private $name;
+    private $name;  
     private $genre;
     private $author;
     private $prize;
     private $songs;
     private $stock;
-    private $db;
+    private $db=$this->contactDB("localhost","USER","root","");
+    public function __construct(){}
     public function __construct($name,$image,$genre,$author,$prize,$songs,$stock)
     {
         //Verify if the data is correct in the db
@@ -21,42 +22,70 @@ class Disk{
                 $this->songs="'$songs'";
                 $this->stock=intval($stock);
                 $this->image="'../CSS/IMG/$image'";
-                $this->db=contactDB("localhost","USER","root","");
             }else{
-                echo "<script>alert('Error al introducir los datos')</script>";
+                session_start();
+                $_SESSION["errores"]="Error al introducir los datos";
+                header("location: createDisk.php");
             }
     }
 
     private function checkName($len,$name){
         return !empty($name) && strlen($name)<=$len && preg_match("/[a-zA-Z ]+/",$name);
     }
+    //Search for a disk using the params
     public function searchFor($name,$author,$genre,$prize){
         $sql="";
         $where="";
         if(!empty($name)){
-            $sql.="NAME ";
             $where.="NAME LIKE '%$name%' ";
         }
         if(!empty($author)){
-            $sql.="AUTHOR ";
             $where.="AUTHOR LIKE '%$author%' ";
         }
         if(!empty($genre)){
-            $sql.="GENRE ";
             $where.="GENRE LIKE '%$genre%' ";
         }
         if(!empty($genre)){
-            $sql.="PRIZE ";
             $where.="PRIZE=$prize' ";
         }
         $sql=str_replace(" ",",",trim($sql));
         $where=str_replace(" ","AND",trim($where));
-        if($sql=""){
-            header("location: searchDisk.php");
-        }else{
-            $select=$this->db->prepare("SELECT $sql FROM DISK WHERE $where");
-            $select->execute();
+        $select=$this->db->prepare("SELECT * FROM DISK WHERE $where");
+        $select->execute();
+        return $select;
         }
+    }
+    private function contactDB($server,$bbdd,$username,$passwd){
+        try{
+            $dsn="mysql:host=$server;dbname=$bbdd";
+            //if there is no password, there is no need to write it over
+            if($passwd!=""){
+                $bd= new pdo($dsn,$username,$passwd);
+            }else{
+                $bd= new pdo($dsn,$username);
+            }
+            $bd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+            $bd->exec("set names utf8mb4");
+            return $bd;
+        }catch(pdoexception $pdoe){
+            session_start();
+            $_SESSION["errores"]="NO SE HA PODIDO ACCEDER A LA BASE DE DATOS, PRUEBE MÁS TARDE";
+            header("location: error.php");
+        }
+
+    }
+    //Insert
+    public function insert(){
+        $insert=$this->db->prepare("INSERT INTO DISKS VALUES(ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
+                                        VALUES(NULL,$this->image,$this->name,$this->genre,$this->author,$this->prize,$this->songs,$this->stock)");
+        $insert->execute();
+    }
+    //Update stock and delete if there is no more
+    public function update($id,$dumb){
+        $update=$this->db->prepare("UPDATE DISKS SET STOCK=intval($dumb)-1 WHERE ID='$id'");
+        $update->execute();
+        $del=$this->db->prepare("DELETE FROM DISK WHERE STOCK=0");
+        $del->execute();
     }
 }
 ?>

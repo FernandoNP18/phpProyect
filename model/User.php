@@ -1,5 +1,4 @@
 <?php
-@ require_once("../controller/connectorDB.php");
 class User{
     private $dni;
     private $name;
@@ -7,8 +6,10 @@ class User{
     private $surname;
     private $password;
     private $email;
-    private $db;
-   function __construct($dni,$name,$username,$surname,$password,$email){
+    private $db=$this->contactDB("localhost","USER","root","");
+
+   public function __construct(){}
+   public function __construct($dni,$name,$username,$surname,$password,$email){
     //Check if the new user is correct
     if($this->checkDni($dni) && $this->checkEmail(50,$email) && $this->checkUser(30,$username)&& $this->checkUser(40,$password) && $this->checkName(50,$surname) && $this->checkName(30,$name)){
         $this->dni=$dni;
@@ -17,16 +18,21 @@ class User{
         $this->surname=$surname;
         $this->email=$email;
         $this->password=$password;
-        //Conect to the DB
-        $this->db=contactDB("localhost","USER","root","");
     }else{
-        echo "<script>alert('Error al introducir los datos')</script>";
+       session_start();
+       $_SESSION["errores"]="Error al introducir los datos";
+        header("location: register.php");
     }
    }
    //Insert into db the new user
    public function insert(){
-    $insert=$this->db->prepare("INSERT INTO USERS VALUES('$this->dni','$this->name','$this->surname','$this->username','$this->password','$this->email')");
+    $insert=$this->db->prepare("INSERT INTO USERS (DNI,NAME,SURNAME,USERNAME,PASSWORD,EMAIL) VALUES('$this->dni','$this->name','$this->surname','$this->username','$this->password','$this->email')");
+    $insert->execute();
    }
+    //Check if the user exists
+    public function checkUserExists($name,$password){
+        return $this->db->query("SELECT NAME, PASSWORD FROM USERS WHERE '$name'=NAME AND '$password'=PASSWORD")==1;
+       }
    //Check dni
    private function checkDni($dni){
        return !empty($dni) && strlen($dni)==9 &&
@@ -44,15 +50,29 @@ class User{
    }
    //check usernames or passwords
    private function checkUser($len,$us){
-       return !empty($us) && strlen($us)<=$len && preg_match("/[a-zA-Z0-9%_$+/",$us);
+       return !empty($us) && strlen($us)<=$len && preg_match("/[a-zA-Z0-9%_$]+/",$us);
     }
    //Check if the dni already exist on the db
    private function dniExist($dni){
     return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")==0; 
    }
-    //Check if the user exists
-   public static function checkUserExists($name,$password){
-    return $this->db->query("SELECT NAME, PASSWORD FROM USERS WHERE '$name'=NAME AND '$password'=PASSWORD")==1;
-   }
+   private function contactDB($server,$bbdd,$username,$passwd){
+    try{
+        $dsn="mysql:host=$server;dbname=$bbdd";
+        //if there is no password, there is no need to write it over
+        if($passwd!=""){
+            $bd= new pdo($dsn,$username,$passwd);
+        }else{
+            $bd= new pdo($dsn,$username);
+        }
+        $bd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+        $bd->exec("set names utf8mb4");
+        return $bd;
+    }catch(pdoexception $pdoe){
+        session_start();
+        $_SESSION["errores"]="NO SE HA PODIDO ACCEDER A LA BASE DE DATOS, PRUEBE MÁS TARDE";
+        header("location: error.php");
+    }
+}
 }
 ?>
