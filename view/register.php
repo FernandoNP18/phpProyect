@@ -10,29 +10,30 @@
   <body>
   <form action="regMid.php" method="post">
   <div class="form-group">
-    <label for="exampleFormControlInput1">DNI</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="dni">
+    <label for="dni">DNI</label>
+    <input type="text" class="form-control" id="dni" name="dni">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Name</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="name">
+    <label for="name">Nombre</label>
+    <input type="text" class="form-control" id="name" name="name">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Surname</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="surname">
+    <label for="surname">Apellidos</label>
+    <input type="text" class="form-control" id="surname" name="surname">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Username</label>
-    <input type="text" class="form-control" id="exampleFormControlInput1" name="username">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" id="username" name="username">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Password</label>
-    <input type="password" class="form-control" id="exampleFormControlInput1" name="password">
+    <label for="password">Contraseña</label>
+    <input type="password" class="form-control" id="password" name="password">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Email</label>
-    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+    <label for="mail">Email</label>
+    <input type="email" class="form-control" id="mail" placeholder="name@example.com" name="email">
   </div>
+  <button type="submit" class="btn btn-primary">Register</button>
 </form>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

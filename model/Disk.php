@@ -45,7 +45,7 @@ class Disk{
         if(!empty($genre)){
             $where.="GENRE LIKE '%$genre%' ";
         }
-        if(!empty($genre)){
+        if(!empty($prize)){
             $where.="PRIZE=$prize' ";
         }
         $sql=str_replace(" ",",",trim($sql));

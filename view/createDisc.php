@@ -10,28 +10,28 @@
   <body>
   <form>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Nombre</label>
-    <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="name">Nombre</label>
+    <input type="text" class="form-control" name="name" id="name">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Genero</label>
-    <input type="text" class="form-control" name="genre" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="genre">Genero</label>
+    <input type="text" class="form-control" name="genre" id="genre">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Autor</label>
-    <input type="text" class="form-control" name="author" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="author">Autor</label>
+    <input type="text" class="form-control" name="author" id="author">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Precio</label>
-    <input type="text" class="form-control" name="prize" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="prize">Precio</label>
+    <input type="text" class="form-control" name="prize" id="prize">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlInput1">Stock</label>
-    <input type="text" class="form-control" name="stock" id="exampleFormControlInput1" placeholder="name@example.com">
+    <label for="stock">Stock</label>
+    <input type="text" class="form-control" name="stock" id="stock">
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Imagen a seleccionar</label>
-    <select class="form-control" id="exampleFormControlSelect1" name="image">
+    <label for="image">Imagen a seleccionar</label>
+    <select class="form-control" id="image" name="image">
       <option value="err.jpg">Sin foto</option>
       <option value="blue.jpg">Disco Azul</option>
       <option  value="red.jpg">Disco Rojo</option>
@@ -39,9 +39,10 @@
     </select>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Canciones</label>
-    <textarea class="form-control" name="songs" id="exampleFormControlTextarea1" rows="3"></textarea>
+    <label for="songs">Canciones</label>
+    <textarea class="form-control" name="songs" id="songs" rows="3"></textarea>
   </div>
+  <button type="submit" class="btn btn-primary">Añade disco</button>
 </form>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
