@@ -28,6 +28,7 @@ class User{
    public function insert(){
     $insert=$this->db->prepare("INSERT INTO USERS (DNI,NAME,SURNAME,USERNAME,PASSWORD,EMAIL) VALUES('$this->dni','$this->name','$this->surname','$this->username','$this->password','$this->email')");
     $insert->execute();
+    header("location: searchDisk.php");
    }
     //Check if the user exists
     public function checkUserExists($name,$password){
