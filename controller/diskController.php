@@ -13,12 +13,12 @@ class diskController{
            $table.="<th scope='col'>Canciones</th><th scope='col'>Stock</th>";
            $table.="</thead><tbody>";
            foreach($listOfDisks as $disk){
-               $table.="<tr class''><td><img src='$disk['image']'></td>";
+               $table.="<tr class''><td><img src='".$disk['image']."'></td>";
                foreach($l as $dumb){
-                   $table.="<td><p>$disk['$dumb']</p></td>";
+                   $table.="<td><p>".$disk['$dumb']."</p></td>";
                }
-               $table.="<td><button type='button' class='btn btn-primary' onclick=addToCart($disk['id'],$disk['stock']))";
-               $table.=">Añadir</button><button type='button' class='btn btn-danger' onclick=deleteFromCart($disk['id'])>Quitar</button>";
+               $table.="<td><button type='button' class='btn btn-primary' onclick=addToCart(".$disk['id'].",".$disk['stock']."))";
+               $table.=">Añadir</button><button type='button' class='btn btn-danger' onclick='".deleteFromCart($disk['id'])."'>Quitar</button>";
                $table.="</td></tr>";
            }
            echo $table;

@@ -54,7 +54,6 @@ class Disk{
         $select->execute();
         return $select;
         }
-    }
     private function contactDB($server,$bbdd,$username,$passwd){
         try{
             $dsn="mysql:host=$server;dbname=$bbdd";
