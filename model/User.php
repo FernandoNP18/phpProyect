@@ -6,7 +6,7 @@ class User{
     private $surname;
     private $password;
     private $email;
-    private $db=$this->contactDB("localhost","USER","root","");
+    private $db=$this->contactDB("localhost","TRABAJO","root","");
 
    public function __construct(){}
    public function __construct($dni,$name,$username,$surname,$password,$email){
@@ -32,7 +32,7 @@ class User{
    }
     //Check if the user exists
     public function checkUserExists($name,$password){
-        return $this->db->query("SELECT NAME, PASSWORD FROM USERS WHERE '$name'=NAME AND '$password'=PASSWORD")==1;
+        return $this->db->query("SELECT USERNAME, PASSWORD FROM USERS WHERE '$name'=USERNAME AND '$password'=PASSWORD")==1;
        }
    //Check dni
    private function checkDni($dni){

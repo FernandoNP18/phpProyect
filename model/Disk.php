@@ -8,18 +8,18 @@ class Disk{
     private $prize;
     private $songs;
     private $stock;
-    private $db=$this->contactDB("localhost","USER","root","");
+    private $db=$this->contactDB("localhost","TRABAJO","root","");
     public function __construct(){}
     public function __construct($name,$image,$genre,$author,$prize,$songs,$stock)
     {
         //Verify if the data is correct in the db
         if(is_float($prize) && is_int($stock) && $this->checkName(30,$name)&&$this->checkName(30,$genre)&&$this->checkName(30,$author)&&$this->checkName(100,$songs)&&
                 $prize>0 && $prize<=50.00 && $stock>0){
-                $this->name="'$name'";
-                $this->genre="'$genre'";
-                $this->author="'$author'";
+                $this->name="'".strtoupper($name)."'";
+                $this->genre="'".strtoupper($genre)."'";
+                $this->author="'".strtoupper($author)."'";
                 $this->prize=floatval($prize);
-                $this->songs="'$songs'";
+                $this->songs="'".strtoupper($songs)."'";
                 $this->stock=intval($stock);
                 $this->image="'../CSS/IMG/$image'";
             }else{
@@ -34,23 +34,27 @@ class Disk{
     }
     //Search for a disk using the params
     public function searchFor($name,$author,$genre,$prize){
-        $sql="";
         $where="";
-        if(!empty($name)){
+        $name=str_replace(" ","",trim(strtoupper($name)));
+        $author=str_replace(" ","",trim(strtoupper($author)));
+        $genre=str_replace(" ","",trim(strtoupper($genre)));
+        if(!empty($name) && $name!="")
+        {
             $where.="NAME LIKE '%$name%' ";
         }
-        if(!empty($author)){
+        if(!empty($author)&& $author!=""){
             $where.="AUTHOR LIKE '%$author%' ";
         }
-        if(!empty($genre)){
+        if(!empty($genre) && $genre!=""){
             $where.="GENRE LIKE '%$genre%' ";
         }
-        if(!empty($prize)){
-            $where.="PRIZE=$prize' ";
+        if(!empty($prize) && is_float($prize)){
+            $where.="PRIZE= ".floatval($prize);
         }
-        $sql=str_replace(" ",",",trim($sql));
-        $where=str_replace(" ","AND",trim($where));
-        $select=$this->db->prepare("SELECT * FROM DISK WHERE $where");
+        if($where!=""){
+            $where="WHERE".$where;
+        }
+        $select=$this->db->prepare("SELECT * FROM DISKS $where");
         $select->execute();
         return $select;
         }
