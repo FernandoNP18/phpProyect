@@ -1,6 +1,6 @@
 <?php
 $_COOKIE["list"]=[];
-class diskController{
+class DiskController{
     public function __construct(){}
     private function show($listOfDisks){
         $l=array("name","genre","author","prize","songs","stock");
@@ -17,7 +17,7 @@ class diskController{
                foreach($l as $dumb){
                    $table.="<td><p>".$disk['$dumb']."</p></td>";
                }
-               $table.="<td><button type='button' class='btn btn-primary' onclick=addToCart(".$disk['id'].",".$disk['stock']."))";
+               $table.="<td><button type='button' class='btn btn-primary' onclick=".addToCart($disk['id'],$disk['stock']).")";
                $table.=">Añadir</button><button type='button' class='btn btn-danger' onclick='".deleteFromCart($disk['id'])."'>Quitar</button>";
                $table.="</td></tr>";
            }

@@ -1,5 +1,5 @@
 <?php
-class userController{
+class UserController{
     public function __construct(){}
     public function select($d,$n,$p){
         return $d->checkUserExists($n,$p);
