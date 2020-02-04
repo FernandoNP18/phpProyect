@@ -9,10 +9,22 @@ class User{
     private $email;
     private $db;
 
-   public static function __constructByDefault(){
+    public function __construct(){
+        //Get the arguments from the constructor
+        $params = func_get_args();
+        //Num of arguments
+        $num_params = func_num_args();
+        $funcion_constructor ='__construct'.$num_params;
+        //Call a function with a regex
+        if (method_exists($this,$funcion_constructor)) {
+            call_user_func_array(array($this,$funcion_constructor),$params);
+        }
+    }
+ //Constructors
+   public function __construct0(){
     $this->db=contactDB("localhost","TRABAJO","root","");
    }
-   public function __construct($dni,$name,$username,$surname,$password,$email){
+   public function __construct6($dni,$name,$username,$surname,$password,$email){
     //Check if the new user is correct
     if($this->checkDni($dni) && $this->checkEmail(50,$email) && $this->checkUser(30,$username)&& $this->checkUser(40,$password) && $this->checkName(50,$surname) && $this->checkName(30,$name)){
         $this->dni=$dni;
@@ -59,7 +71,7 @@ class User{
     }
    //Check if the dni already exist on the db
    private function dniExist($dni){
-    return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")->fetchColumn()==0; 
+    return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")==0; 
    }
 }
 ?>

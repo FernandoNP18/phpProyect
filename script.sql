@@ -8,7 +8,7 @@ CREATE TABLE `trabajo`.`disk` (
      `SONGS`  VARCHAR(100)    NOT NULL ,
      `PRIZE`  FLOAT           NOT NULL ,
      `STOCK`  INT             NOT NULL , 
-     `IMAGE`  VARCHAR(10)     NOT NULL , 
+     `IMAGE`  VARCHAR(25)     NOT NULL , 
           PRIMARY KEY (`ID`)) ENGINE = InnoDB;
 CREATE TABLE `trabajo`.`users` (
      `DNI`      VARCHAR(9)      NOT NULL , 
@@ -21,4 +21,4 @@ CREATE TABLE `trabajo`.`users` (
 --Error en la tabla disk->Disks*
 RENAME TABLE `trabajo`.`disk` TO `trabajo`.`disks`;
 
-INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234')
+INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234');

@@ -13,12 +13,19 @@ class DiskController{
            $table.="<th scope='col'>Canciones</th><th scope='col'>Stock</th>";
            $table.="</thead><tbody>";
            foreach($listOfDisks as $disk){
-               $table.="<tr class''><td><img src='".$disk['image']."'></td>";
-               foreach($l as $dumb){
-                   $table.="<td><p>".$disk['$dumb']."</p></td>";
-               }
-               $table.="<td><button type='button' class='btn btn-primary' onclick=".addToCart($disk['id'],$disk['stock']).")";
-               $table.=">Añadir</button><button type='button' class='btn btn-danger' onclick='".deleteFromCart($disk['id'])."'>Quitar</button>";
+               $table.="<tr class''><td><img src='";
+               $table.=$disk[7];
+               $table.="'></td>";
+               $table.="<td><p>".$disk[1]."</p></td>";
+               $table.="<td><p>".$disk[2]."</p></td>";
+               $table.="<td><p>".$disk[3]."</p></td>";
+               $table.="<td><p>".$disk[5]."</p></td>";
+               $table.="<td><p>".$disk[4]."</p></td>";
+               $table.="<td><p>".$disk[6]."</p></td>";
+               $id=$disk[0];
+               $stock=$disk[6];
+               $table.="<td><button type='button' class='btn btn-primary' onclick='addToCart($id,$stock)';)";
+               $table.=">Añadir</button><button type='button' class='btn btn-danger' onclick='deleteFromCart($id);'>Quitar</button>";
                $table.="</td></tr>";
            }
            echo $table;
@@ -37,6 +44,7 @@ class DiskController{
 //Functions for events
 function addToCart($n,$quantity){
     $_COOKIE["list"]=array_push($_COOKIE["list"],"$n $quantity");
+    echo "<script>alert('Añadido al carrito')</script>";
 }
 function deleteFromCart($id){
     $l=[];
@@ -50,5 +58,6 @@ function deleteFromCart($id){
     for($i=$i+1;$i<count($_COOKIE["list"]);$i++){
         array_push($l,$_COOKIE["list"][$i]);
     }
+    echo "<script>alert('Eliminado del carrito')</script>";
 }
 ?>

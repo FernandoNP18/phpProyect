@@ -9,10 +9,22 @@ class Disk{
     private $songs;
     private $stock;
     private $db;
-    public static function __constructByDefault(){
+    public function __construct(){
+        //Get the arguments from the constructor
+        $params = func_get_args();
+        //Num of arguments
+        $num_params = func_num_args();
+        $funcion_constructor ='__construct'.$num_params;
+        //Call a function with a regex
+        if (method_exists($this,$funcion_constructor)) {
+            call_user_func_array(array($this,$funcion_constructor),$params);
+        }
+    }
+    //Construct
+    public function __construct0(){
     $this->db=contactDB("localhost","TRABAJO","root","");
     }
-    public function __construct($name,$image,$genre,$author,$prize,$songs,$stock)
+    public function __construct7($name,$image,$genre,$author,$prize,$songs,$stock)
     {
         //Verify if the data is correct in the db
         if(is_float($prize) && is_int($stock) && $this->checkName(30,$name)&&$this->checkName(30,$genre)&&$this->checkName(30,$author)&&$this->checkName(100,$songs)&&
@@ -37,35 +49,37 @@ class Disk{
     }
     //Search for a disk using the params
     public function searchFor($name,$author,$genre,$prize){
-        $where="";
+        $where=[];
         $name=str_replace(" ","",trim(strtoupper($name)));
         $author=str_replace(" ","",trim(strtoupper($author)));
         $genre=str_replace(" ","",trim(strtoupper($genre)));
+        $prizeF=floatval($prize);
         if(!empty($name) && $name!="")
         {
-            $where.="NAME LIKE '%$name%' ";
+            array_push($where,"NAME LIKE '%$name%' ");
         }
-        if(!empty($author)&& $author!=""){
-            $where.="AUTHOR LIKE '%$author%' ";
+        if(!empty($author) && $author!=""){
+            array_push($where," AUTHOR LIKE '%$author%' ");
         }
         if(!empty($genre) && $genre!=""){
-            $where.="GENRE LIKE '%$genre%' ";
+            array_push($where," GENRE LIKE '%$genre%' ");
         }
-        if(!empty($prize) && is_float($prize)){
-            $where.="PRIZE= ".floatval($prize);
+        if(!empty($prizeF)){
+            array_push($where," PRIZE= ".floatval($prizeF));
         }
-        if($where!=""){
-            $where="WHERE".$where;
+        if(!empty($where)){
+            $where="WHERE ".implode("AND",$where);
         }
-        $select=$this->db->prepare("SELECT * FROM DISKS $where");
-        $select->execute();
+        @$select=$this->db->prepare("SELECT * FROM DISKS $where");
+        @$select->execute();
         return $select;
         }
     //Insert
     public function insert(){
-        $insert=$this->db->prepare("INSERT INTO DISKS VALUES(ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
-                                        VALUES(NULL,$this->image,$this->name,$this->genre,$this->author,$this->prize,$this->songs,$this->stock)");
-        $insert->execute();
+        $dumb=$this->db;
+        $insert=$dumb->prepare("INSERT INTO DISKS VALUES(ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
+                                        VALUES(?,?,?,?,?,?,?,?)");
+        $insert->execute([NULL,$this->image,$this->name,$this->genre,$this->author,$this->prize,$this->songs,$this->stock]);
     }
     //Update stock and delete if there is no more
     public function update($id,$dumb){
