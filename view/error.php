@@ -12,7 +12,7 @@
   <strong>ERROR</strong> <?php 
   session_start();
   if(isset($_SESSION["errores"])){
-      echo'$_SESSION["errores"]';
+      echo"<h3>".$_SESSION["errores"]."</h3>";
       unset($_SESSION["errores"]);
   }
   ?>
