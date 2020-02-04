@@ -1,5 +1,5 @@
 <?php
-require_once("../controller/connectorDB.php");
+require("../controller/controller.php");
 class Disk{
     private $image;
     private $name;  
@@ -8,8 +8,10 @@ class Disk{
     private $prize;
     private $songs;
     private $stock;
-    private $db=$this->contactDB("localhost","TRABAJO","root","");
-    public function __construct(){}
+    private $db;
+    public static function __constructByDefault(){
+    $this->db=contactDB("localhost","TRABAJO","root","");
+    }
     public function __construct($name,$image,$genre,$author,$prize,$songs,$stock)
     {
         //Verify if the data is correct in the db
@@ -22,6 +24,7 @@ class Disk{
                 $this->songs="'".strtoupper($songs)."'";
                 $this->stock=intval($stock);
                 $this->image="'../CSS/IMG/$image'";
+                $this->db=contactDB("localhost","TRABAJO","root","");
             }else{
                 session_start();
                 $_SESSION["errores"]="Error al introducir los datos";
@@ -58,25 +61,6 @@ class Disk{
         $select->execute();
         return $select;
         }
-    private function contactDB($server,$bbdd,$username,$passwd){
-        try{
-            $dsn="mysql:host=$server;dbname=$bbdd";
-            //if there is no password, there is no need to write it over
-            if($passwd!=""){
-                $bd= new pdo($dsn,$username,$passwd);
-            }else{
-                $bd= new pdo($dsn,$username);
-            }
-            $bd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-            $bd->exec("set names utf8mb4");
-            return $bd;
-        }catch(pdoexception $pdoe){
-            session_start();
-            $_SESSION["errores"]="NO SE HA PODIDO ACCEDER A LA BASE DE DATOS, PRUEBE MÁS TARDE";
-            header("location: error.php");
-        }
-
-    }
     //Insert
     public function insert(){
         $insert=$this->db->prepare("INSERT INTO DISKS VALUES(ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 

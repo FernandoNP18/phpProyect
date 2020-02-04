@@ -26,7 +26,7 @@
       <button type="submit" class="btn btn-primary">Logueate</button>
     </form>
     <div id="formFooter">
-      <a class="underlineHover" href="#">No tiene cuenta?</a>
+      <a class="underlineHover" href="register.php">No tiene cuenta?</a>
     </div>
 
   </div>

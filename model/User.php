@@ -1,4 +1,5 @@
 <?php
+require("../controller/controller.php");
 class User{
     private $dni;
     private $name;
@@ -6,9 +7,11 @@ class User{
     private $surname;
     private $password;
     private $email;
-    private $db=$this->contactDB("localhost","TRABAJO","root","");
+    private $db;
 
-   public function __construct(){}
+   public static function __constructByDefault(){
+    $this->db=contactDB("localhost","TRABAJO","root","");
+   }
    public function __construct($dni,$name,$username,$surname,$password,$email){
     //Check if the new user is correct
     if($this->checkDni($dni) && $this->checkEmail(50,$email) && $this->checkUser(30,$username)&& $this->checkUser(40,$password) && $this->checkName(50,$surname) && $this->checkName(30,$name)){
@@ -18,6 +21,7 @@ class User{
         $this->surname=$surname;
         $this->email=$email;
         $this->password=$password;
+        $this->db=contactDB("localhost","TRABAJO","root","");
     }else{
        session_start();
        $_SESSION["errores"]="Error al introducir los datos";
@@ -55,25 +59,7 @@ class User{
     }
    //Check if the dni already exist on the db
    private function dniExist($dni){
-    return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")==0; 
+    return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")->fetchColumn()==0; 
    }
-   private function contactDB($server,$bbdd,$username,$passwd){
-    try{
-        $dsn="mysql:host=$server;dbname=$bbdd";
-        //if there is no password, there is no need to write it over
-        if($passwd!=""){
-            $bd= new pdo($dsn,$username,$passwd);
-        }else{
-            $bd= new pdo($dsn,$username);
-        }
-        $bd->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-        $bd->exec("set names utf8mb4");
-        return $bd;
-    }catch(pdoexception $pdoe){
-        session_start();
-        $_SESSION["errores"]="NO SE HA PODIDO ACCEDER A LA BASE DE DATOS, PRUEBE MÁS TARDE";
-        header("location: error.php");
-    }
-}
 }
 ?>

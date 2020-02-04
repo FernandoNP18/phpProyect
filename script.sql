@@ -20,3 +20,5 @@ CREATE TABLE `trabajo`.`users` (
         PRIMARY KEY (`DNI`)) ENGINE = InnoDB;
 --Error en la tabla disk->Disks*
 RENAME TABLE `trabajo`.`disk` TO `trabajo`.`disks`;
+
+INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234')
