@@ -35,7 +35,7 @@
     <label for="prize">Precio</label>
     <input type="number" class="form-control" id="prize" name="prize">
   </div>
-  <button type="submit" class="btn btn-primary">Logueate</button>
+  <button type="submit" class="btn btn-primary">Busca</button>
       </form>
       <?php
       require_once("../controller/DiskController.php");

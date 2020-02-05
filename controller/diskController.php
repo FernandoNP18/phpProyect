@@ -24,7 +24,7 @@ class DiskController{
                $table.="<td><p>".$disk[6]."</p></td>";
                $id=$disk[0];
                $stock=$disk[6];
-               $table.="<td><button type='button' class='btn btn-primary' onclick='addToCart($id,$stock)';)";
+               $table.="<td><button type='button' class='btn btn-primary' onclick='addToCart($id,$stock);')";
                $table.=">Añadir</button><button type='button' class='btn btn-danger' onclick='deleteFromCart($id);'>Quitar</button>";
                $table.="</td></tr>";
            }
@@ -41,12 +41,15 @@ class DiskController{
         $d->update($i,$u);
     }
 }
+?>
+<script>
 //Functions for events
-function addToCart($n,$quantity){
+function addToCart($n,$quantity){<?php
     $_COOKIE["list"]=array_push($_COOKIE["list"],"$n $quantity");
     echo "<script>alert('Añadido al carrito')</script>";
+    ?>
 }
-function deleteFromCart($id){
+function deleteFromCart($id){<?php
     $l=[];
     for($i=0;$i<count($_COOKIE["list"]);$i++){
         if(explode(" ",$_COOKIE["list"][$i])[0]!=$id){
@@ -59,5 +62,7 @@ function deleteFromCart($id){
         array_push($l,$_COOKIE["list"][$i]);
     }
     echo "<script>alert('Eliminado del carrito')</script>";
+    ?>
 }
-?>
+</script>
+
