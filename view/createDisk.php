@@ -29,7 +29,7 @@
     <input type="text" class="form-control" name="author" id="author">
   </div>
   <div class="form-group">
-    <label for="prize">Precio</label>
+    <label for="prize">Precio inferior a 50€</label>
     <input type="text" class="form-control" name="prize" id="prize">
   </div>
   <div class="form-group">

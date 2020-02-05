@@ -8,7 +8,7 @@ CREATE TABLE `trabajo`.`disk` (
      `SONGS`  VARCHAR(100)    NOT NULL ,
      `PRIZE`  FLOAT           NOT NULL ,
      `STOCK`  INT             NOT NULL , 
-     `IMAGE`  VARCHAR(25)     NOT NULL , 
+     `IMAGE`  VARCHAR(21)     NOT NULL , 
           PRIMARY KEY (`ID`)) ENGINE = InnoDB;
 CREATE TABLE `trabajo`.`users` (
      `DNI`      VARCHAR(9)      NOT NULL , 
@@ -22,3 +22,15 @@ CREATE TABLE `trabajo`.`users` (
 RENAME TABLE `trabajo`.`disk` TO `trabajo`.`disks`;
 
 INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234');
+INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES
+('07807198D', 'Fernando', 'Mateos', 'Fermago11', 'fer@gmail.com', 'pikachufriki14'),
+('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234'),
+('53374687J', 'ADADSSA', 'ADASDAAS', 'potito', 'nuria@gmail.com', 'asadadadsa'),
+('77826124N', 'Cunt', 'SexyPistolero', 'ChingaTumadre', 'fer@gmail.com', 'lolete');
+
+INSERT INTO `disks` (`ID`, `NAME`, `GENRE`, `AUTHOR`, `SONGS`, `PRIZE`, `STOCK`, `IMAGE`) VALUES
+(1, 'INCENSE AND IRON', 'POWER METAL', 'POWERWOLF', 'NO SE QUE PONER', 2000, 5, '../CSS/IMG/err.jpg'),
+(2, 'YO', 'Mijo', 'NANAI', 'UWU', 49, 50, '../CSS/IMG/purple.jpg'),
+(3, 'Sum41', 'Hell', 'WOLOLO', 'UWU OWO EWE', 30.69, 12, '../CSS/IMG/blue.jpg'),
+(4, 'DiscosTopeguapos', 'Génerogenérico', 'WOLOLO', 'UWU OWO EWE', 30.69, 12, '../CSS/IMG/blue.jpg'),
+(5, 'PRUEBA1', 'FOLK', 'NO SE QUE METER', 'LOREM IPSUM A MOGOLLóN', 40.69, 134, '../CSS/IMG/blue.jpg');
