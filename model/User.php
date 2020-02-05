@@ -26,14 +26,14 @@ class User{
    }
    public function __construct6($dni,$name,$username,$surname,$password,$email){
     //Check if the new user is correct
-    if($this->checkDni($dni) && $this->checkEmail(50,$email) && $this->checkUser(30,$username)&& $this->checkUser(40,$password) && $this->checkName(50,$surname) && $this->checkName(30,$name)){
+    $this->db=contactDB("localhost","TRABAJO","root","");
+    if($this->checkDni($dni) && $this->checkExistUser($username) && $this->checkEmail(50,$email) && $this->checkUser(30,$username)&& $this->checkUser(40,$password) && $this->checkName(50,$surname) && $this->checkName(30,$name)){
         $this->dni=$dni;
         $this->name=$name;
         $this->username=$username;
         $this->surname=$surname;
         $this->email=$email;
         $this->password=$password;
-        $this->db=contactDB("localhost","TRABAJO","root","");
     }else{
        session_start();
        $_SESSION["errores"]="Error al introducir los datos";
@@ -44,11 +44,14 @@ class User{
    public function insert(){
     $insert=$this->db->prepare("INSERT INTO USERS (DNI,NAME,SURNAME,USERNAME,PASSWORD,EMAIL) VALUES('$this->dni','$this->name','$this->surname','$this->username','$this->password','$this->email')");
     $insert->execute();
-    header("location: searchDisk.php");
+   }
+   private function checkExistUser($name){
+       echo $this->db->query("SELECT USERNAME FROM USERS WHERE '$name'=USERNAME")->rowCount()==0?"True":"False";
+    return $this->db->query("SELECT USERNAME FROM USERS WHERE '$name'=USERNAME")->rowCount()==0;
    }
     //Check if the user exists
     public function checkUserExists($name,$password){
-        return $this->db->query("SELECT USERNAME, PASSWORD FROM USERS WHERE '$name'=USERNAME AND '$password'=PASSWORD")==1;
+        return $this->db->query("SELECT USERNAME, PASSWORD FROM USERS WHERE '$name'=USERNAME AND '$password'=PASSWORD")->rowCount()==1;
        }
    //Check dni
    private function checkDni($dni){
@@ -71,7 +74,10 @@ class User{
     }
    //Check if the dni already exist on the db
    private function dniExist($dni){
-    return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")==0; 
+    return $this->db->query("SELECT DNI FROM USERS WHERE DNI='$dni'")->rowCount()==0; 
+   }
+   public function getName(){
+       return $this->name;
    }
 }
 ?>

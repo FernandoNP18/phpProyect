@@ -22,7 +22,6 @@
     <form action="log.php" method="post">
       <input type="text" class="fadeIn second" name="username" placeholder="username">
       <input type="text" class="fadeIn third" name="password" placeholder="password">
-      <input type="submit" class="fadeIn fourth" value="Log In">
       <button type="submit" class="btn btn-primary">Logueate</button>
     </form>
     <div id="formFooter">

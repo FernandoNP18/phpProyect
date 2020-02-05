@@ -26,26 +26,29 @@ class Disk{
     }
     public function __construct7($name,$image,$genre,$author,$prize,$songs,$stock)
     {
+        echo floatval($prize)<=50.00?"True":"False";
         //Verify if the data is correct in the db
-        if(is_float($prize) && is_int($stock) && $this->checkName(30,$name)&&$this->checkName(30,$genre)&&$this->checkName(30,$author)&&$this->checkName(100,$songs)&&
-                $prize>0 && $prize<=50.00 && $stock>0){
-                $this->name="'".strtoupper($name)."'";
-                $this->genre="'".strtoupper($genre)."'";
-                $this->author="'".strtoupper($author)."'";
+        if(is_float(floatval($prize)) && is_int(intval($stock)) && $this->checkName(30,$name)&&$this->checkName(30,$genre)
+                    &&$this->checkName(30,$author)&&$this->checkName(100,$songs)&&
+                    floatval($prize)>0 && floatval($prize)<=50.00 && intval($stock)>0){
+                $this->name=strtoupper($name);
+                $this->genre=strtoupper($genre);
+                $this->author=strtoupper($author);
                 $this->prize=floatval($prize);
-                $this->songs="'".strtoupper($songs)."'";
+                $this->songs=strtoupper($songs);
                 $this->stock=intval($stock);
-                $this->image="'../CSS/IMG/$image'";
-                $this->db=contactDB("localhost","TRABAJO","root","");
+                $this->image="../CSS/IMG/$image";
+                echo "Datos insertados correctamente";
             }else{
-                session_start();
-                $_SESSION["errores"]="Error al introducir los datos";
-                header("location: createDisk.php");
+                 session_start();
+                 $_SESSION["errores"]="Error al introducir los datos";
+                 header("location: createDisk.php");
             }
+            $this->db=contactDB("localhost","TRABAJO","root","");
     }
 
     private function checkName($len,$name){
-        return !empty($name) && strlen($name)<=$len && preg_match("/[a-zA-Z ]+/",$name);
+        return !empty($name) && strlen($name)<=$len && preg_match("/[a-zA-Z0-9 ]+/",$name);
     }
     //Search for a disk using the params
     public function searchFor($name,$author,$genre,$prize){
@@ -77,9 +80,26 @@ class Disk{
     //Insert
     public function insert(){
         $dumb=$this->db;
-        $insert=$dumb->prepare("INSERT INTO DISKS VALUES(ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
-                                        VALUES(?,?,?,?,?,?,?,?)");
-        $insert->execute([NULL,$this->image,$this->name,$this->genre,$this->author,$this->prize,$this->songs,$this->stock]);
+        echo "INSERT INTO DISKS (ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
+        VALUES(NULL,'$this->image',
+        '$this->name',
+        '$this->genre',
+        '$this->author'
+        ,$this->prize,
+        '$this->songs',$this->stock);";
+        try{
+        $insert=$dumb->prepare("INSERT INTO DISKS (ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
+                                        VALUES(NULL,\"$this->image\",
+                                        \"$this->name\",
+                                        \"$this->genre\",
+                                        \"$this->author\"
+                                        ,$this->prize,
+                                        \"$this->songs\",$this->stock);");
+        $insert->execute();
+        echo "Se ha insertado";
+        }catch(PDOException $e){
+            echo "Conexion fallida".$e->getMessage();
+        }
     }
     //Update stock and delete if there is no more
     public function update($id,$dumb){

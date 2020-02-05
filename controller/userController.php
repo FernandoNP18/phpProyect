@@ -7,5 +7,8 @@ class UserController{
     public function insert($d){
         $d->insert();
     }
+    public function getName($d){
+        return $d->getName();
+    }
 }
 ?>

@@ -8,13 +8,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+  <h3 style="color:brown;">
     <?php
   session_start();
         if(isset($_SESSION["errores"])){
-            echo '<h3 "style="color:brown;">'.$_SESSION["errores"].'</h3>';
+            echo $_SESSION["errores"];
             unset($_SESSION["errores"]);
         }
         ?>
+        </h3>
   <form action="regMid.php" method="post">
   <div class="form-group">
     <label for="dni">DNI</label>
