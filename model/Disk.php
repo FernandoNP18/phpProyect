@@ -80,13 +80,6 @@ class Disk{
     //Insert
     public function insert(){
         $dumb=$this->db;
-        echo "INSERT INTO DISKS (ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
-        VALUES(NULL,'$this->image',
-        '$this->name',
-        '$this->genre',
-        '$this->author'
-        ,$this->prize,
-        '$this->songs',$this->stock);";
         try{
         $insert=$dumb->prepare("INSERT INTO DISKS (ID,IMAGE,NAME,GENRE,AUTHOR,PRIZE,SONGS,STOCK) 
                                         VALUES(NULL,\"$this->image\",
@@ -96,17 +89,20 @@ class Disk{
                                         ,$this->prize,
                                         \"$this->songs\",$this->stock);");
         $insert->execute();
-        echo "Se ha insertado";
         }catch(PDOException $e){
             echo "Conexion fallida".$e->getMessage();
         }
     }
     //Update stock and delete if there is no more
-    public function update($id,$dumb){
-        $update=$this->db->prepare("UPDATE DISKS SET STOCK=intval($dumb)-1 WHERE ID='$id'");
-        $update->execute();
-        $del=$this->db->prepare("DELETE FROM DISK WHERE STOCK=0");
-        $del->execute();
+    public function update($id){
+        $numOfStock=$this->db->prepare("SELECT STOCK FROM DISKS WHERE ID='$id'");
+        $stock=$numOfStock->execute();
+        foreach($stock as $dumb){
+            $update=$this->db->prepare("UPDATE DISKS SET STOCK=$dumb[0]-1 WHERE ID='$id'");
+            $update->execute();
+            $del=$this->db->prepare("DELETE FROM DISK WHERE STOCK=0");
+            $del->execute();
+        }
     }
 }
 ?>

@@ -11,11 +11,6 @@
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <script>
-    <?php
-        echo "alert(Bienvenido: ".$_GET["us"].")";
-    ?>
-  </script>
   <body>
     <h3>Busca por:</h3>
       <form action="searchDisk.php" method="post">
