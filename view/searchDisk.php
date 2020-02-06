@@ -12,6 +12,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+  <h3 style="color:brown;">
+    <?php
+  session_start();
+        if(isset($_SESSION["errores"])){
+            echo $_SESSION["errores"];
+            unset($_SESSION["errores"]);
+        }
+        ?>
+        </h3>
     <h3>Busca por:</h3>
       <form action="searchDisk.php" method="post">
       <div class="form-group">
@@ -31,6 +40,10 @@
     <input type="number" class="form-control" id="prize" name="prize">
   </div>
   <button type="submit" class="btn btn-primary">Busca</button>
+  <a role='button' class='btn btn-outline-success' aria-disabled='false'
+               href='cart.php?save=true&us=<?php
+                echo $_GET['us'];
+               ?>'>Compra realizada¡¡</a>
       </form>
       <?php
       require_once("../controller/DiskController.php");

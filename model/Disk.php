@@ -26,7 +26,6 @@ class Disk{
     }
     public function __construct7($name,$image,$genre,$author,$prize,$songs,$stock)
     {
-        echo floatval($prize)<=50.00?"True":"False";
         //Verify if the data is correct in the db
         if(is_float(floatval($prize)) && is_int(intval($stock)) && $this->checkName(30,$name)&&$this->checkName(30,$genre)
                     &&$this->checkName(30,$author)&&$this->checkName(100,$songs)&&
@@ -95,13 +94,21 @@ class Disk{
     }
     //Update stock and delete if there is no more
     public function update($id){
-        $numOfStock=$this->db->prepare("SELECT STOCK FROM DISKS WHERE ID='$id'");
-        $stock=$numOfStock->execute();
-        foreach($stock as $dumb){
-            $update=$this->db->prepare("UPDATE DISKS SET STOCK=$dumb[0]-1 WHERE ID='$id'");
+        foreach($id as $dumb){
+            echo $dumb;
+            $numOfStock=$this->db->prepare("SELECT STOCK FROM DISKS WHERE ID=".intval($dumb));
+            $stock=$numOfStock->execute();
+            echo "<br>";
+            print_r($stock);
+            $update=$this->db->prepare("UPDATE DISKS SET STOCK=$stock-1 WHERE ID=".intval($dumb));
             $update->execute();
-            $del=$this->db->prepare("DELETE FROM DISK WHERE STOCK=0");
+            $del=$this->db->prepare("DELETE FROM DISKS WHERE STOCK<=0");
             $del->execute();
+            $numOfStock=$this->db->prepare("SELECT STOCK FROM DISKS WHERE ID=".intval($dumb));
+            $stock=$numOfStock->execute();
+            echo "<br>";
+            print_r($stock);
+            echo "<br>";
         }
     }
 }

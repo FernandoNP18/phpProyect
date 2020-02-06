@@ -4,9 +4,6 @@ class DiskController{
     public function __construct(){}
     private function show($listOfDisks){
         $l=array("name","genre","author","prize","songs","stock");
-        if(empty($listOfDisks)){
-            echo"<h2>No hay ningún disco que coincida</h2>";
-        }else{
            $table="<table class'table table-dark'><thead><th scope='col'>Imagen</th>";
            $table.="<th scope='col'>Nombre</th><th scope='col'>Género</th>";
            $table.="<th scope='col'>Autor</th><th scope='col'>Precio</th>";
@@ -31,7 +28,6 @@ class DiskController{
                $table.="</td></tr>";
            }
            echo $table;
-        }
     }
     public function select($d,$n,$a,$g,$p){
         $this->show($d->searchFor($n,$a,$g,$p));
@@ -39,8 +35,8 @@ class DiskController{
     public function insert($d){
         $d->insert();
     }
-    public function update($d,$i,$u){
-        $d->update($i,$u);
+    public function update($d,$i){
+        $d->update($i);
     }
 }
 ?>
