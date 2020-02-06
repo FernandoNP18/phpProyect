@@ -22,7 +22,7 @@
         ?>
         </h3>
     <h3>Busca por:</h3>
-      <form action="searchDisk.php" method="post">
+      <form action="searchDisk.php?" method="post">
       <div class="form-group">
         <label for="name">Nombre</label>
         <input type="text" name="name" class="form-control" id="name">

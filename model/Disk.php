@@ -95,9 +95,9 @@ class Disk{
     //Update stock and delete if there is no more
     public function update($id){
         foreach($id as $dumb){
-            $numOfStock=$this->db->prepare("SELECT STOCK FROM DISKS WHERE ID=".intval($dumb));
+            $numOfStock=$this->db->prepare("SELECT * FROM DISKS WHERE ID=".intval($dumb));
             $stock=$numOfStock->execute();
-            $update=$this->db->prepare("UPDATE DISKS SET STOCK=$stock-1 WHERE ID=".intval($dumb));
+            $update=$this->db->prepare("UPDATE DISKS SET STOCK=$stock[6]-1 WHERE ID=".intval($dumb));
             $update->execute();
             //$del=$this->db->prepare("DELETE FROM DISKS WHERE STOCK<=0");
             //$del->execute();
