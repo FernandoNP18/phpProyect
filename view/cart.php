@@ -34,11 +34,10 @@ if(isset($_GET["save"])){
         require_once("../model/Disk.php");
         $diskController=new DiskController();
         $diskController->update(new Disk(),$_SESSION["cart".$_GET["us"]]);
-        sleep(10);
         $_SESSION["errores"]="COMPRA REALIZADA";
         $_SESSION["cart".$_GET["us"]]=array();
     }
 
 }
-//header("location: searchDisk.php?us=".$_GET["us"]);
+header("location: searchDisk.php?us=".$_GET["us"]);
 ?>

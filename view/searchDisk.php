@@ -19,10 +19,11 @@
             echo $_SESSION["errores"];
             unset($_SESSION["errores"]);
         }
+        $var=$_GET["us"];
         ?>
         </h3>
     <h3>Busca por:</h3>
-      <form action="searchDisk.php?" method="post">
+      <form action="searchDisk.php?us=<?php echo $var; ?>" method="post">
       <div class="form-group">
         <label for="name">Nombre</label>
         <input type="text" name="name" class="form-control" id="name">
