@@ -38,7 +38,7 @@
   </div>
   <div class="form-group">
     <label for="prize">Precio</label>
-    <input type="number" class="form-control" id="prize" name="prize">
+    <input type="text" class="form-control" id="prize" name="prize">
   </div>
   <button type="submit" class="btn btn-primary">Busca</button>
   <a role='button' class='btn btn-outline-success' aria-disabled='false'

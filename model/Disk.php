@@ -56,6 +56,7 @@ class Disk{
         $author=str_replace(" ","",trim(strtoupper($author)));
         $genre=str_replace(" ","",trim(strtoupper($genre)));
         $prizeF=floatval($prize);
+		echo $prizeF;
         if(!empty($name) && $name!="")
         {
             array_push($where,"NAME LIKE '%$name%' ");
@@ -67,7 +68,7 @@ class Disk{
             array_push($where," GENRE LIKE '%$genre%' ");
         }
         if(!empty($prizeF)){
-            array_push($where," PRIZE= ".floatval($prizeF));
+            array_push($where," PRIZE=$prizeF");
         }
         if(!empty($where)){
             $where="WHERE ".implode("AND",$where);
