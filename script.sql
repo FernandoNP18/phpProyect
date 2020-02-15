@@ -1,5 +1,4 @@
 CREATE DATABASE IF NOT EXISTS TRABAJO;
---Creamos la base de datos y las dos tablas Disk y Users
 CREATE TABLE `trabajo`.`disk` (
      `ID`     INT             NOT NULL AUTO_INCREMENT ,
      `NAME`   VARCHAR(30)     NOT NULL ,
@@ -18,7 +17,6 @@ CREATE TABLE `trabajo`.`users` (
      `EMAIL`    VARCHAR(50)     NOT NULL , 
      `PASSWORD` VARCHAR(40)     NOT NULL , 
         PRIMARY KEY (`DNI`)) ENGINE = InnoDB;
---Error en la tabla disk->Disks*
 RENAME TABLE `trabajo`.`disk` TO `trabajo`.`disks`;
 
 INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234');
