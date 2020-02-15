@@ -28,7 +28,7 @@ INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) 
 
 INSERT INTO `disks` (`ID`, `NAME`, `GENRE`, `AUTHOR`, `SONGS`, `PRIZE`, `STOCK`, `IMAGE`) VALUES
 (1, 'INCENSE AND IRON', 'POWER METAL', 'POWERWOLF', 'NO SE QUE PONER', 2000, 5, '../CSS/IMG/err.jpg'),
-(2, 'YO', 'Mijo', 'NANAI', 'UWU', 49, 50, '../CSS/IMG/purple.jpg'),
-(3, 'Sum41', 'Hell', 'WOLOLO', 'UWU OWO EWE', 30.69, 12, '../CSS/IMG/blue.jpg'),
-(4, 'DiscosTopeguapos', 'Génerogenérico', 'WOLOLO', 'UWU OWO EWE', 30.69, 12, '../CSS/IMG/blue.jpg'),
+(2, 'YO', 'MIJO', 'NANAI', 'UWU', 49, 50, '../CSS/IMG/purple.jpg'),
+(3, 'Sum41', 'HELL', 'WOLOLO', 'UWU OWO EWE', 30.69, 12, '../CSS/IMG/blue.jpg'),
+(4, 'DISCOSTOPEGUAPOS', 'GENEROGENERICO', 'WOLOLO', 'UWU OWO EWE', 30.69, 12, '../CSS/IMG/blue.jpg'),
 (5, 'PRUEBA1', 'FOLK', 'NO SE QUE METER', 'LOREM IPSUM A MOGOLLóN', 40.69, 134, '../CSS/IMG/blue.jpg');

@@ -4,7 +4,7 @@ class DiskController{
     public function __construct(){}
     private function show($listOfDisks){
         $l=array("name","genre","author","prize","songs","stock");
-           $table="<table class'table table-dark'><thead><th scope='col'>Imagen</th>";
+           $table="<table class='table table-dark'><thead><th scope='col'>Imagen</th>";
            $table.="<th scope='col'>Nombre</th><th scope='col'>Género</th>";
            $table.="<th scope='col'>Autor</th><th scope='col'>Precio</th>";
            $table.="<th scope='col'>Canciones</th><th scope='col'>Stock</th>";

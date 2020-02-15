@@ -19,10 +19,11 @@
             echo $_SESSION["errores"];
             unset($_SESSION["errores"]);
         }
+        $var=$_GET["us"];
         ?>
         </h3>
     <h3>Busca por:</h3>
-      <form action="searchDisk.php" method="post">
+      <form action="searchDisk.php?us=<?php echo $var; ?>" method="post">
       <div class="form-group">
         <label for="name">Nombre</label>
         <input type="text" name="name" class="form-control" id="name">
@@ -37,7 +38,7 @@
   </div>
   <div class="form-group">
     <label for="prize">Precio</label>
-    <input type="number" class="form-control" id="prize" name="prize">
+    <input type="text" class="form-control" id="prize" name="prize">
   </div>
   <button type="submit" class="btn btn-primary">Busca</button>
   <a role='button' class='btn btn-outline-success' aria-disabled='false'

@@ -46,7 +46,6 @@ class User{
     $insert->execute();
    }
    private function checkExistUser($name){
-       echo $this->db->query("SELECT USERNAME FROM USERS WHERE '$name'=USERNAME")->rowCount()==0?"True":"False";
     return $this->db->query("SELECT USERNAME FROM USERS WHERE '$name'=USERNAME")->rowCount()==0;
    }
     //Check if the user exists
