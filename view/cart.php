@@ -39,5 +39,5 @@ if(isset($_GET["save"])){
     }
 
 }
-//header("location: searchDisk.php?us=".$_GET["us"]);
+header("location: searchDisk.php?us=".$_GET["us"]);
 ?>
