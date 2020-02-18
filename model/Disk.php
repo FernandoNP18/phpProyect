@@ -56,7 +56,6 @@ class Disk{
         $author=str_replace(" ","",trim(strtoupper($author)));
         $genre=str_replace(" ","",trim(strtoupper($genre)));
         $prizeF=floatval($prize);
-		echo $prizeF;
         if(!empty($name) && $name!="")
         {
             array_push($where,"NAME LIKE '%$name%' ");

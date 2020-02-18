@@ -1,9 +1,7 @@
 <?php
-$_COOKIE["list"]=[];
 class DiskController{
     public function __construct(){}
     private function show($listOfDisks){
-        $l=array("name","genre","author","prize","songs","stock");
            $table="<table class='table table-dark'><thead><th scope='col'>Imagen</th>";
            $table.="<th scope='col'>Nombre</th><th scope='col'>Género</th>";
            $table.="<th scope='col'>Autor</th><th scope='col'>Precio</th>";
@@ -20,7 +18,6 @@ class DiskController{
                $table.="<td><p>".$disk[4]."</p></td>";
                $table.="<td><p>".$disk[6]."</p></td>";
                $id=$disk[0];
-               $stock=$disk[6];
                $table.="<td><a role='button' class='btn btn-primary' aria-disabled='false'
                href='cart.php?i=$id&us=".$_GET['us']."'>";
                $table.="Añadir</a><td><a role='button' class='btn btn-danger' aria-disabled='false'
