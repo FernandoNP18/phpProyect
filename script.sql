@@ -19,7 +19,6 @@ CREATE TABLE `trabajo`.`users` (
         PRIMARY KEY (`DNI`)) ENGINE = InnoDB;
 RENAME TABLE `trabajo`.`disk` TO `trabajo`.`disks`;
 
-INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234');
 INSERT INTO `users` (`DNI`, `NAME`, `SURNAME`, `USERNAME`, `EMAIL`, `PASSWORD`) VALUES
 ('07807198D', 'Fernando', 'Mateos', 'Fermago11', 'fer@gmail.com', 'pikachufriki14'),
 ('30696569X', 'Fernando', 'Mateos Gomez', 'Moffinguer', 'fermago11@gmail.com', 'admin1234'),
